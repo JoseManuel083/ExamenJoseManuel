@@ -1,0 +1,87 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Bansi</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/sweetalert2.min.css">
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Bansi.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container">
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Agregar</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Examenes">Examenes</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <div class="container mt-4">
+            <h4 class="mb-3">Fuente de datos</h4>
+
+            <form method="post" asp-page="/Index" asp-page-handler="SeleccionarFuente" id="formCambioFuente">
+                <div class="mb-3">
+                    <select class="form-select" name="fuenteDatos" id="fuenteDatos">
+                        <option value="ado">ADO.NET</option>
+                        <option value="api">WebService</option>
+                        
+                    </select>
+                </div>
+            </form>
+
+
+        </div>
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2025 - Bansi - Privacy
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/sweetalert2.min.js"></script>
+    <script>
+        async function enviarSeleccion() {
+            let formData = new FormData();
+            formData.append("fuenteDatos", document.getElementById("fuenteDatos").value);
+
+            let token = document.querySelector("[name='__RequestVerificationToken']").value; 
+
+            let response = await fetch("/Index?handler=SeleccionarFuente", {
+                method: "POST",
+                headers: {
+                    "XSRF-TOKEN": token 
+                },
+                body: formData
+            });
+
+            let data = await response.text();
+            console.log("Respuesta del servidor:", data);
+        }
+
+
+        document.getElementById("fuenteDatos").addEventListener("change",enviarSeleccion);
+
+    </script>
+
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

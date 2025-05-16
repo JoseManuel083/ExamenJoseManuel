@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\apiexamen\apiexamen.csproj" />
+    <ProjectReference Include="..\WsApiexamen\WsApiexamen.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="apiexamen">
+      <HintPath>..\apiexamen\bin\Debug\net8.0\apiexamen.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

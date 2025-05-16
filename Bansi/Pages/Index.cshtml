@@ -1,0 +1,39 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Alta examen";
+}
+
+<div class="text-center">
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card shadow-lg">
+                    <div class="card-body">
+                        <h2 class="text-center mb-4">Registro de Examen</h2>
+                        <form method="post">
+                            <!--<div class="mb-3">
+                                <label for="idExamen" class="form-label">ID Examen</label>
+                                <input type="number" class="form-control" id="idExamen" asp-for="NuevoExamen.IdExamen" required>
+                            </div>-->
+
+                            <div class="mb-3">
+                                <label for="nombre" class="form-label">Nombre</label>
+                                <input type="text" class="form-control" id="nombre" asp-for="NuevoExamen.Nombre" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="descripcion" class="form-label">Descripción</label>
+                                <textarea class="form-control" id="descripcion" asp-for="NuevoExamen.Descripcion" rows="3" required></textarea>
+                            </div>
+
+                            <button type="submit" class="btn btn-success w-100">Guardar Examen</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
